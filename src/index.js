@@ -20,7 +20,7 @@ function showCharacterNames() {
     const totalVotesSpan = document.querySelector('#vote-count')
     const totalVotes = item.votes + votes.votesCast
     totalVotesSpan.textContent = parseInt(item.votes)
-      voteCount(item)
+    voteCount(item)
     }))
 }
 showCharacterNames()
@@ -28,7 +28,6 @@ showCharacterNames()
 function voteCount(item) {
     const enterVotes = document.querySelector('#votes-form')
     enterVotes.addEventListener('submit', (e)=>{
-        e.preventDefault()
         const votes = {
           "votesCast": parseInt(e.target.name.value)
         }
@@ -51,6 +50,8 @@ function updateVotes (item){
   .then(res =>res.json)
   .then(data => console.log(data))
 }
+
+//final
 
 
 
