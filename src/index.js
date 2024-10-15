@@ -1,27 +1,23 @@
 // Your code here
-//show characters names here
+//show characters names 
 
 const baseUrl = "http://localhost:3000"
 
 function showCharacterNames() {
-    fetch ( `${baseUrl}/characters`)
+    const characterDiv = document.getElementById("character-bar")
+    fetch (`${baseUrl}/characters`)
     .then((response) => response.json())
-    .then(data => {characterDetails = data})
-
+    .then(data => data.forEach((item)=>{
+      const span = document.createElement('span')
+      span.textContent = item.name
+      characterDiv.appendChild(span)
+    }))
 }
 showCharacterNames()
 
-let characterDetails
-const characterDiv = document.getElementById("character-bar")
-
-fetch ( `${baseUrl}/characters`, {
-    method : "GET"
-})
-.then((response) => response.json())
-.then(data => {characterDetails = data})
+//commit
 
 
-.then(()=>console.log(characterDetails[0]))
 
 
 
