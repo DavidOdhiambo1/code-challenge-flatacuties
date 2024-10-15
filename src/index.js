@@ -15,11 +15,42 @@ function showCharacterNames() {
       span.addEventListener("click", ()=>{
         const image = document.querySelector('img')
         image.src = item.image
-        console.log(image.src)
       })
+//diplay total votes
+    const totalVotesSpan = document.querySelector('#vote-count')
+    const totalVotes = item.votes + votes.votesCast
+    totalVotesSpan.textContent = parseInt(item.votes)
+      voteCount(item)
     }))
 }
 showCharacterNames()
+
+function voteCount(item) {
+    const enterVotes = document.querySelector('#votes-form')
+    enterVotes.addEventListener('submit', (e)=>{
+        e.preventDefault()
+        const votes = {
+          "votesCast": parseInt(e.target.name.value)
+        }
+        console.log(votes.votesCast)
+    
+    updateVotes(item)
+
+    })
+}
+
+
+function updateVotes (item){
+  fetch (`${baseUrl}/characters/${item.id}`, {
+  method : 'PATCH',
+  headers: {
+    'Content-type': 'application/json',
+  },
+  body: JSON.stringify(item)
+  })
+  .then(res =>res.json)
+  .then(data => console.log(data))
+}
 
 
 
