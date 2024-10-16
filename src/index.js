@@ -15,12 +15,13 @@ function showCharacterNames() {
       span.addEventListener("click", ()=>{
         const image = document.querySelector('img')
         image.src = item.image
+        const charactersName = document.querySelector('#name')
+        charactersName.textContent=item.name
+        voteCount(item)
       })
 //diplay total votes
-    const totalVotesSpan = document.querySelector('#vote-count')
-    const totalVotes = item.votes + votes.votesCast
-    totalVotesSpan.textContent = parseInt(item.votes)
-    voteCount(item)
+    
+    
     }))
 }
 showCharacterNames()
@@ -28,10 +29,14 @@ showCharacterNames()
 function voteCount(item) {
     const enterVotes = document.querySelector('#votes-form')
     enterVotes.addEventListener('submit', (e)=>{
+        e.preventDefault()
         const votes = {
-          "votesCast": parseInt(e.target.name.value)
+          "votesCast": parseInt(e.target.votes.value) + parseInt(item.votes)
         }
-        console.log(votes.votesCast)
+        const totalVotesSpan = document.querySelector('#vote-count')
+        let totalVotes = votes.votesCast
+        console.log(totalVotes)
+        totalVotesSpan.textContent = votes.votesCast
     
     updateVotes(item)
 
